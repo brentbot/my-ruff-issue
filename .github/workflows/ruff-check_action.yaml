@@ -21,14 +21,10 @@ jobs:
         echo "=== /run/.containerenv ==="
         ls -la /run/.containerenv || echo "NOT FOUND"
 
-    - name: install rust
+    - name: unzip ruff
       run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
-        . "$HOME/.cargo/env"
-
-    - name: Install uv
-      uses: astral-sh/setup-uv@v7
+        gunzip ruff.gz
 
     - name: run ruff
       run: |
-        uvx --from "git+https://github.com/brentbot/ruff@claude/investigate-wsl-detection-7SHeK" ruff check --select EXE .
+        ./ruff check --select EXE .
