@@ -21,9 +21,11 @@ jobs:
         echo "=== /run/.containerenv ==="
         ls -la /run/.containerenv || echo "NOT FOUND"
 
-    - name: check is_docker
+    - name: install rust
       run: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-        git clone https://github.com/TheLarkInn/is-docker
-        cd is-docker
-        cargo run --example main
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --profile minimal
+        . "$HOME/.cargo/env"
+
+    - name: run ruff
+      run: |
+        uvx --from "git+https://github.com/brentbot/ruff@claude/investigate-wsl-detection-7SHeK" ruff check --select EXE .
