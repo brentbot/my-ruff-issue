@@ -30,3 +30,9 @@ jobs:
 
     - name: ruff from pre-commit
       run: uv run pre-commit run --all-files
+
+    - name: check is_docker
+      run: |
+        git clone https://github.com/TheLarkInn/is-docker
+        cd is-docker
+        cargo run --example main
