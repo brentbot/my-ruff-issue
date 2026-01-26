@@ -24,6 +24,7 @@ jobs:
     - name: unzip ruff
       run: |
         gunzip ruff.gz
+        chmod +x ruff
 
     - name: run ruff
       run: |
